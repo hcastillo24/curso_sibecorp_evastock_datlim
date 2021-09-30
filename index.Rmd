@@ -72,7 +72,7 @@ No obstante lo anterior, una fracción importante de las pesquerías actuales ca
 Se necesitará instalar los siguientes packages desde CRAN:
 
 ```{r, eval=FALSE}
-install.packages(c("devtools","ggplot2","ggpubr","strucchanges","LBSPR", "DLMtool"))
+install.packages(c("devtools","ggplot2","ggpubr","strucchange","LBSPR", "DLMtool"))
 ```
 
 En relación con métodos basados sólo en capturas, se utilizará el paquete de [Free (2018) datalimited2: More stock assessment methods for data-limited fisheries. R package version 0.1.0](https://github.com/cfree14/datalimited2); i.e.,
