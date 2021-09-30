@@ -1,0 +1,102 @@
+---
+title: "Evaluación y Manejo de Pesquerías con Datos Limitados"
+author: "Luis A. Cubillos (lucubillos@udec.cl)"
+date: "04 Oct 2021"
+always_allow_html: true
+output:
+   html_document:
+     collapsed: no
+     smooth_scroll: no
+     theme: united
+     toc: yes
+     toc_depth: 4
+     toc_float: yes
+   world_document:
+     toc: yes
+     toc_depth: '4'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE,message = FALSE)
+```
+
+# Presentación
+
+[Luis A. Cubillos](https://www.scopus.com/authid/detail.uri?authorId=6701723759) es profesor asociado del [Departamento de Oceanografía](http://oceanografia.udec.cl/), [Facultad de Ciencias Naturales y Oceanográficas](https://www.naturalesudec.cl) de la [Universidad de Concepción](http://www6.udec.cl/pexterno/), investigador asociado del [Centro de Investigación Oceanográfica COPAS Sur-Asutral](http://www.sur-austral.cl/), CEO del Centro de Evaluación Pesquera y Manejo de Recursos SpA (CEPMAR).
+
+# Introducción al curso
+
+El curso Evaluación y Manejo de Pesquerías con Datos Limitados será dictado desde el 4 al 5 de Octubre de 2021 en el marco del **Simposio Iberoamericano de Ecología Reproductiva, Reclutamiento y Pesquerías** [V SIBECORP](http://www.vsibecorp.cetmar.org/index.php), organizado por la Red Iberoamericana de Investigación para el Uso Sostenible de los Recursos Pesqueros (RED INVIPESCA) y la Universidad del Magdalena, en la ciudad de Santa Marta (Colombia) en alianza con la Universidad Jorge Tadeo Lozano, Sede Santa Marta y la Universidad Nacional de Colombia, Sede Caribe.
+
+El curso está dirigido a estudiantes, graduados y profesionales que se desempeñan en investigación pesquera, evaluación y manejo de pesquerías, destacando aspectos de biológia reproductiva, potencial reproductivo, y reclutamiento en la evaluaciuón y gestión pesquera. Considerando la importancia que el SIBECORP otorga a estos tópicos, y en especial en el énfasis de análisis de pesquerías con datos limitados, este curso pretende aumentar las capacidades de investigadores jóvenes en el análisis, evaluación y manejo de pesquerías con pocos datos. El énfasis estará puesto métodos empíricos basados en parámetros de historia de vida y modelos por recluta, métodos basados sólo en datos de captura y métodos basados en datos de frecuencia de tallas con un enfoque poblacional y multiespecífico.
+
+# Descripción
+
+El manejo pesquero se sustenta en objetivos de manejo que se operativizan a través de procedimientos de manejo (PM), siendo estos últimos definidos como el conjunto comprendido entre: a) un sistema de monitoreo para recolectar datos, b) un estimador de la situación del stock, ya sea un modelo de evaluación o un indicador; y c) una regla de control de la explotación, ya sea basada en mortalidad por pesca o capturas. La regla de control de la explotación se basa en estrategias de explotación genéricas, y se definen según umbrales o puntos biológicos de referencia objetivos y límites.
+
+No obstante lo anterior, una fracción importante de las pesquerías actuales carecen de observaciones sistemáticas de datos o información ya sea dependientes o independientes de la pesquería. Esta situación genera incertidumbre e impone desafíos para los analistas y evaluadores de stock, administradores y usuarios. En este contexto, la investigación estratégica es fundamental para evaluar el desempeño de PM de pesquerías limitadas en datos, así como actualizar el estado con datos adicionales a ser recopilados.
+
+# Objetivos
+
+1. Conceptualizar el marco biológico para la explotación, identificar objetivos de manejo, indicadores de estatus y elaborar procedimientos de manejo en base a niveles (tiers).
+
+2. Analizar la dinámica de poblaciones marinas explotadas sobre la base de parámetros de historia de vida y producción de juveniles (reclutamiento)
+
+3. Aplicar métodos empíricos y modelos de evaluación basado en datos de captura y modelos basados en datos de frecuencia de tallas.
+
+4. Evaluar estrategias de explotación mediante simulación a través del enfoque de Evaluación de Estrategias de Manejo.
+
+# Contenidos
+
+1.	Objetivos de manejo, procedimiento de manejo, y evaluación de estrategias de manejo.
+
+2.	Estrategias de explotación, reglas de control para la explotación basada en capturas, índices de abundancia y tallas.
+
+3.  Parámetros de historia de vida, ¿cómo llenar el vacío y obtener puntos biológicos de referencia objetivos y límites?
+
+4. Modelos de evaluación basados sólo en datos de captura (CMSY, OCOM, otros). 
+
+5. Modelos de evaluación de stock basado en datos de frecuencia de tallas (LBI, LBSPR, otros).
+
+6. Preparación de modelos de simulación utilizados como modelos operativo para evaluar estimadores y procedimientos de manejo.
+
+
+# Requisitos
+
+1. Entrenamiento básico en biología de poblaciones, biología pesquera, ecología marina y evaluación de poblaciones.
+
+2. Capacidades y entrenamiento previo de trabajo con [R](https://cran.r-project.org) utilizando [Rstudio](https://www.rstudio.com), además de experiencia básica de trabajo con [R Markdown](https://rmarkdown.rstudio.com).
+
+**Nota**: Para las prácticas y análisis de casos de estudio se requiere instalar R  Versión 4.1.0 (2021-05-18) o más reciente que esté disponible en el sitio [CRAN](https://cran.r-project.org), y RStudio Version 1.4.1717 o más reciente que esté disponible en el sitio [RStudio desktop](https://www.rstudio.com/products/rstudio/#rstudio-desktop) (versión gratuita para PC). Una buena alternativa es trabajar con [RStudio cloud](https://rstudio.cloud).
+
+Se necesitará instalar los siguientes packages desde CRAN:
+
+```{r, eval=FALSE}
+install.packages(c("devtools","ggplot2","ggpubr","strucchanges","LBSPR", "DLMtool"))
+```
+
+En relación con métodos basados sólo en capturas, se utilizará el paquete de [Free (2018) datalimited2: More stock assessment methods for data-limited fisheries. R package version 0.1.0](https://github.com/cfree14/datalimited2); i.e.,
+
+```{r, eval=FALSE}
+devtools::install_github("cfree14/datalimited2")
+```
+
+A su vez, se necesita instalar el package ```FishLife``` de Thorson (2017, 2020), el cual está disponible en el repositorio [GitHub de James Thorson](https://github.com/James-Thorson-NOAA/FishLife), con el siguiente instrucción:
+
+```{r, eval=FALSE}
+devtools::install_github("james-thorson/FishLife")
+```
+
+Se necesitará descargar los datos [aquí](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim/Datos))
+ y los tutoriales y códigos en R adicionales que se utilizarán para las demostraciones y sesiones prácticas.
+ 
+Todos los archivos y códigos pueden ser descargados [aquí](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim) para trabajar "offline" (click 'Download ZIP' cerca de la parte superior para descargar).
+
+# Referencias
+
+Free, C. M. (2018) datalimited2: More stock assessment methods for data-limited fisheries. R package version 0.1.0. https://github.com/cfree14/datalimited2
+
+Thorson, J. T., Munch, S. B., Cope, J. M., & Gao, J. (2017). Predicting life history parameters for all fishes worldwide. Ecological Applications, 27(8), 2262–2276. https://doi.org/10.1002/eap.1606 
+
+Thorson, J. T. (2020). Predicting recruitment density dependence and intrinsic growth rate for all fishes worldwide using a data-integrated life-history model. Fish and Fisheries, 21(2), 237–251. https://doi.org/10.1111/faf.12427
+
