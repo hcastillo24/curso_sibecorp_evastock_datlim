@@ -60,6 +60,9 @@ No obstante lo anterior, una fracción importante de las pesquerías actuales ca
 
 6. Preparación de modelos de simulación utilizados como modelos operativo para evaluar estimadores y procedimientos de manejo.
 
+# Programa
+
+El programa de trabajo del curso se puede encontrar [aquí](https://luisacubillos.github.io/curso_sibecorp_evastock_datlim/syllabus.html)
 
 # Requisitos
 
