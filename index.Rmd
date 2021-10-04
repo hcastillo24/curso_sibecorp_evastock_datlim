@@ -90,7 +90,7 @@ A su vez, se necesita instalar el package ```FishLife``` de Thorson (2017, 2020)
 devtools::install_github("james-thorson/FishLife")
 ```
 
-Se necesitará descargar los datos [aquí](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim/Datos)
+Se necesitará descargar los datos [aquí](https://luisacubillos.github.io/curso_sibecorp_evastock_datlim/Datos)
  y los tutoriales y códigos en R adicionales que se utilizarán para las demostraciones y sesiones prácticas.
  
 Todos los archivos y códigos pueden ser descargados [aquí](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim) para trabajar "offline" (click 'Download ZIP' cerca de la parte superior para descargar).
