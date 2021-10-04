@@ -354,7 +354,7 @@ OCm3 <- zbrt(year=yr, catch=catch)
 **Nota**: el método zBRT de Zhou estima la saturación, que esequivalente al complemeto del agotamiento (S = 1 - Depletion); i.e.,
 
 $$S = B/k = 0.5B/B_{RMS}$$
-Note: S = 1 - depletion = B / K = 0.5 * B/BMSY.A partir de la serie de tiempo de captura se obtiene la saturación $B/k$, i.e.
+A partir de la serie de tiempo de captura se obtiene la saturación $B/k$, i.e.
 
 ```{r}
 plot_dlm(OCm3)
