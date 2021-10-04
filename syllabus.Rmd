@@ -1,0 +1,39 @@
+---
+title: "Evaluación y Manejo de Pesquerías con Datos Limitados"
+author: "Luis A. Cubillos"
+date: "Octubre 2021"
+output: html_document
+---
+
+Los requisitos se pueden encontrar [aquí](https://luisacubillos.github.io/curso_sibecorp_evastock_datlim/index.html). Los archivos y códigos pueden ser obtenidos [aquí](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim) (click 'Download ZIP' cerca de la parte superior para descargar a tu sistema).
+
+## Día 1: Conceptos básicos
+
+Hora  | Tópicos
+------------- | ----------------------------------------------------
+8:00-9:30 | [Introducción a la evaluación de stock y manejo](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim/Clases/clase_1_introductoria.pdf)
+9:30-9:45 | Pausa y café
+9:45-10:45 | [Algunos modelos de evaluación con datos limitados](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim/Clases/clase_2_modelos_datalim.pdf)
+10:45-11:00 | Pausa y café
+11:00-12:00 | [Guía práctica: Demostración en R](https://github.com/LuisACubillos/curso_sibecorp_evastock_datlim/Lab/Lab1_Guía_Práctica_Demo_DLM.pdf)
+
+## Día 2: Simulación poblacional
+
+Hora  | Tópicos
+------------- | ----------------------------------------------------
+8:00-9:30 | Parámetros de Historia de Vida y FishLife, Simulación Poblacional
+9:30-9:45 | Pausa y café
+9:45-10:45 | Guía práctica simulación poblacional - Tutorial Sim. Pop. Brama
+10:45-11:00 | Pausa y café
+11:00-12:00 | Evaluación de desempeño HCR basado en tallas
+
+## Day 3: Evaluación de Estrategia de Manejo
+
+Hora  | Tópicos
+------------- | ----------------------------------------------------
+8:00-9:30 | Análisis estructural datos de captura
+9:30-9:45 | Pausa y café
+9:45-10:45 | Regla de control empírica - Tutorial Sim. Pop. Brama
+10:45-11:00 | Pausa y café
+11:00-12:00 | Demo evaluación regla de control de captura empírica
+
