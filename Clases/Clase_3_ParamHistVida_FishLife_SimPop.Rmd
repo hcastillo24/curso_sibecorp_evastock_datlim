@@ -22,9 +22,9 @@ Hora  | Tópicos
 ------------- | ----------------------------------------------------
 8:00-9:30 | Parámetros de Historia de Vida y FishLife, Simulación Poblacional
 9:30-9:45 | Pausa y café
-9:45-10:45 | Guía práctica simulación poblacional - Tutorial Sim. Pop. Brama
+9:45-10:45 | Guía y práctica FishLife y Curvas de Producción
 10:45-11:00 | Pausa y café
-11:00-12:00 | Evaluación de desempeño HCR basado en capturas
+11:00-12:00 | Simulación Pop con Error de Proceso
 
 ## Teoría de la Historia de Vida
 
