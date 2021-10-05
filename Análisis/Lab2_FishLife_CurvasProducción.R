@@ -1,6 +1,6 @@
 ################################################################
 #   Lab 2 Demo FishLife y Curvas de Producción
-#   Método: CMSY2, OCOM, zBRT
+#   Método: FishLife y Modelos de Producción Edad-Estructurado
 #   Prof: Luis A. Cubillos
 #   Curso: V SIBECORP
 #   Fecha: 5 Octubre 2021
