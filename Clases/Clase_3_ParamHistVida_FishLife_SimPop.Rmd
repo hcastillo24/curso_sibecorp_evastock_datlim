@@ -16,6 +16,16 @@ knitr::opts_chunk$set(dev = 'pdf')
 par(mar = c(3,3,2,1), mgp = c(2,0.7,0), tck = -0.01, las = 1)
 ```
 
+## Programa
+
+Hora  | Tópicos
+------------- | ----------------------------------------------------
+8:00-9:30 | Parámetros de Historia de Vida y FishLife, Simulación Poblacional
+9:30-9:45 | Pausa y café
+9:45-10:45 | Guía práctica simulación poblacional - Tutorial Sim. Pop. Brama
+10:45-11:00 | Pausa y café
+11:00-12:00 | Evaluación de desempeño HCR basado en capturas
+
 ## Teoría de la Historia de Vida
 
 - La teoría de la historia de vida intenta comprender y predecir las trayectorias de sobrevivencia, crecimiento, y reproducción maximizando el fitness en diferentes ambientes, desde el punto de vista genético como no-genetico [(Roff 2007)](http://www.nature.com/nrg/journal/v8/n2/pdf/nrg2040.pdf).
@@ -131,7 +141,13 @@ $$M\times t_m=1.65$$
 $$\frac{M}{K}=1.5$$
 
 $$\frac{L_m}{L_{\infty}}=0.66$$
+## Consideraciones
 
+* Los "parámetros de historia de vida" se refieren a todos aquellos que determinan los procesos de _crecimiento_, _madurez_ y _mortalidad_ y que definen el fitness total o eficacia biológica.
+
+* Los valores plausibles para el conjunto de estos parámetros se sustentan en relaciones estables entre ellos que definen ciertas invariantes.
+
+* Dichas invariantes, combinadas con la teoría evolutiva podría permitir la estimación de dichos parámetros para especies poco estudiadas
 
 ## Trabajos recientes 
 
@@ -299,7 +315,7 @@ knitr::kable(Sigma, digits=3)
 df <- data.frame(Linf=Linf,K=K,Lm=Lm,M=M,A=A)
 ```
 
-## Relaciones entre params.
+## Relaciones entre parámetros
 
 ```{r echo=FALSE, fig.width=8, fig.height=4}
 library(ggplot2)
@@ -325,21 +341,77 @@ fig
 ```
 
 
-## Consideraciones finales
+## Curvas de producción en equilibrio
 
-* Los "parámetros de historia de vida" se refieren a todos aquellos que determinan los procesos de _crecimiento_, _madurez_ y _mortalidad_ y que definen el fitness total o eficacia biológica.
+* Modelo de producción estructurado por edad
 
-* Los valores plausibles para el conjunto de estos parámetros se sustentan en relaciones estables entre ellos que definen ciertas invariantes.
+  - Parámetros de historia de vida
+  - Mortalidad por pesca y selectividad
+  - Relación stock-recluta
+  - Modelos por recluta
+  - Error de proceso
 
-* Dichas invariantes, combinadas con la teoría evolutiva podría permitir la estimación de dichos parámetros para especies poco estudiadas
 
-## Frontera ¿Son las invariantes una ilusión?
+## Relación S-R y Modelos por recluta
 
-Se plantea la siguiente pregunta de nuestro análisis: ¿Cómo identificamos un invariante?
+$$R = {\alpha S}/{\left ( 1 + \beta {S} \right) }, \qquad \text{Beverton-Holt}$$
+donde $\alpha$ y $\beta$ son parámetros.
 
-[Nee S, Colegrave N, West SA, Grafen A. 2005. The illusion of invariant quantities in life histories. Science 309:1236-1239.](http://www.sciencemag.org/content/309/5738/1236.full)
+## Steepness
 
-[de Jong G. 2005. Is invariance across animal species just an illusion? Science 309:1193-1195.](http://www.sciencemag.org/content/309/5738/1193.full)
+Para el modelo de Beverton y Holt, los parámetros se expresaron por:
+
+$$\alpha  =   \left ( {1-h} \right) {S_0} / \left ( {4h {R_0}} \right )$$
+$$\beta  =     \left ({5h-1} \right) / \left ({4h {R_0}} \right)$$
+
+donde $h$ es el escarpamiento (steepness).
+
+## Biomasa desovante no explotada
+
+Se puede estimar en términos relativos con $R_0 = 1$, i.e.,
+
+$$p_{F=0,j}= R_0,\qquad  j=1$$
+$$p_{F=0,j}=p_{F=0,j-1}\exp(-M), \qquad j=2,...,A$$
+
+$R_0=1$ = Reclutamiento inexplotado que genera la biomasa desovante no explotada $(SPR_{F=0})$, $M$ es la tasa de mortalidad natural, y $A$ es la edad máxima. Luego,
+
+$$SPR_{F=0} = \sum\limits_{j=1}^A {{m_j}{w_j}{p_{F=0,j}} \exp \left(- {M_j}\tau\right)}$$
+
+donde $m_j$ es la proporción de individuos maduros a la edad $j$, $W_j$ es el peso promedio a la edad $j$, $npr_0$ es la abundancia no explotada a la edad $j$, $M_j$ es la tasa instantánea de mortalidad natural a la edad $j$, y $\tau$ es el mes del pico de desove como una fracción del año.
+
+## Biomasa desovante por recluta
+
+$$p_{F,j}=p_{F,j-1}\exp \left({-M+F_{j-1}}\right), \qquad j=2,...,A$$
+
+$$SPR_{F} = \sum\limits_{j=1}^A {{m_j}{w_j}{p_{F,j}} \exp \left(- {(M+F_j)}\tau\right)}$$
+
+![](Figs/clase3_fig02.jpg){width=50%}
+
+
+## Rendimiento por recluta
+
+$$YPR = \sum_{j=1}^A F_jw_jp_{F,j}(1-\exp(-(M+F_j)))/(M+F_j)$$
+
+![](Figs/clase3_fig03.jpg){width=50%}
+
+## Relación SPR
+
+La biomasa desovante por recluta (SPR), en función de la mortalidad por pesca (F), a reclutamiento relativo en equilibrio en función de F, se estima por:
+
+$$R = {{\left (SPR_F - \alpha \right) / \left(\beta SPR \right) }, \qquad \text{Beverton-Holt}}$$
+
+El rendimiento relativo: $Y = YPR\times R$. Asimismo, la biomasa desovante se puede estimar multiplicando SPR por $R$,i.e.,
+
+$$S = SPR_F \times R$$
+
+## Resumen de cálculos
+
+![](Figs/clase3_fig04.jpg){width=70%}
+
+
+## Consultas
+
+¿Preguntas...?
 
 ## Pausa y café
 
