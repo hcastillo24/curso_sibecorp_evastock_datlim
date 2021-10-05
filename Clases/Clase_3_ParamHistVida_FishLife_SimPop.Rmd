@@ -1,0 +1,349 @@
+---
+title: "Clase 3: Parámetros de Historia de Vida (FishLife) y Simulación Poblacional"
+author: Luis A. Cubillos \newline \tiny \texttt{lucubillos@gmail.com} \newline \vspace{1cm}
+   \newline \includegraphics[width=4cm]{mis_logos.jpeg}
+   \newline \vspace{2cm}
+   \tiny https://luisacubillos.github.io/curso_sibecorp_evastock_datlim/index.html
+output:
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(dev = 'pdf')
+par(mar = c(3,3,2,1), mgp = c(2,0.7,0), tck = -0.01, las = 1)
+```
+
+## Teoría de la Historia de Vida
+
+- La teoría de la historia de vida intenta comprender y predecir las trayectorias de sobrevivencia, crecimiento, y reproducción maximizando el fitness en diferentes ambientes, desde el punto de vista genético como no-genetico [(Roff 2007)](http://www.nature.com/nrg/journal/v8/n2/pdf/nrg2040.pdf).
+
+- El crecimiento es el proceso más determinante del fitness, porque afecta la sobrevivencia y la reproduccción.
+[Enberg et al. (2012)](http://onlinelibrary.wiley.com/doi/10.1111/j.1439-0485.2011.00460.x/full)
+
+## El tamaño de un individuo es un estado
+
+- El tamaño del cuerpo tiene importancia ecológica.
+
+- Crecimiento y tamaño están relacionado y correlacionado, pero no son lo mismo.
+
+- Crecimiento es el _proceso_ por el cual se llega a cierto tamaño (un _estado_).
+
+## Cambios en el crecimiento
+
+- Tasas de crecimiento variable
+
+- Edad de madurez variable
+
+- Inversión en reproducción variable
+
+## Esfuerzo reproductivo
+
+* Asignación de energía para la reproducción
+
+* Presupuesto energético:
+
+  - Antes de la madurez: mantención y crecimiento.
+
+  - Después de la madurez: mantención, crecimiento o reproducción.
+
+* Compromisos entre:
+
+  - Retrasos en la reproducción: crecimiento rápido y tamaño grande.
+
+  - Reproducción temprana...
+
+## Parámetros de historia de vida
+
+* Crecimiento: parámetros del modelo de von Bertalanffy $L_{\infty}$ y $K$
+
+* Sobrevivencia $M$ y Longevidad, o edad máxima $t_{max}$
+
+* Reproducción: edad de madurez $tm$ y talla de madurez $Lm$
+
+## Crecimiento en longitud
+
+$L_t = L_{\infty}(1-\exp(-K(t-t_0)))$
+
+```{r echo=FALSE,fig.height=4,fig.width=6}
+edad <- round(runif(50,1,15),0)
+set.seed(775)
+Lt <- 110*(1-exp(-0.25*(edad+0.65)))*exp(rnorm(50,0,0.1))
+plot(edad,Lt,las=1,ylab="Longitud (cm)",xlab="Edad (años)",ylim=c(0,130),xlim=c(0,16))
+```
+
+## Sobrevivencia
+
+$Z = F + M$;  $N_{t+1}=N_t \exp(-Z)$
+
+```{r echo=FALSE,fig.height=4,fig.width=6}
+Z=0.3
+Nt <- 100*exp(-edad*Z)
+plot(edad, Nt, ylim=c(0,100),xlim=c(0,16),las=1,ylab = "Abundancia", xlab = "Edad")
+```
+
+## Madurez
+
+$Pt=\frac{1}{1+exp(-(a-b*Lt))}$; y $L_m = -a/b$
+
+```{r echo=FALSE,fig.height=4,fig.width=6}
+am = -6
+bm = 2
+tm=am/bm
+Pt = 1/(1+exp(-(am+bm*edad)))
+plot(edad,Pt,ylim = c(0,1),xlim=c(0,16),ylab="Madurez",xlab="Edad (años)",las=1)
+```
+
+## Teoría de historia de vida 
+
+La teoría de historia de vida intenta proporcionar explicaciones evolutivas de las variaciones en las formas en que las especies animales viven sus vidas.
+
+- Relaciones adimensionales de varios parámetros clave de historia de vida son los mismos para las diferentes especies, incluso a través de taxones distante.
+
+## Invariantes
+
+La teoría de la evolución de la historia de vida produce invariantes, que se constituyen en productos o razones entre ciertos parámetros de historia de vida y permanecen aproximadamente constantes dentro de algunos taxa.
+
+[Charnov (1993)](http://global.oup.com/academic/product/life-history-invariants-9780198540717;jsessionid=C51553FED1B37E20F6883A79F8BCD384?cc=cl&lang=en&)
+
+Muchas de esas invariantes surgen de modelos simples de historia de vida que maximizan el el éxito de la duración reproductiva de manera densidad-independiente (e.g. Jensen 1996).
+
+## La contribución de Beverton y Holt
+
+* Beverton y Holt plantearon relaciones entre parámetros de historia de vida, cuya recopilación fue la base empírica para la teoría de Charnov.
+
+1. Producto entre la mortalidad natural ($M$) y la edad de primera madurez ($t_m$)
+2. Razón entre $M$ y el coeficiente de crecimiento del modelo de von Bertalanffy ($K$)
+3. Razón entre la longitud de madurez ($L_m$) y la longitud asintótica ($L_{\infty}$).
+
+\tiny [Jennings,S., Dulvy, N.K. 2008. Beverton and Holt's insights into life history theory: influence, application and future use. In: Payne, A., Cotter, J., Potter, T. (ed.) Advances in fisheris science, 50 year on from Beverton and Holt, Wiley, p. 434-450.](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1405170832.html)
+
+\tiny [Prince, J., Hordyk, A., Valencia, S.R., Loneragan, N., Sainsbury, K. 2015. Revisiting the concept of Beverton–Holt life-history invariants with the aim of informing data-poor fisheries assessment, ICES Journal of Marine Science, 72: 194–203](https://academic.oup.com/icesjms/article/72/1/194/816563)
+
+## Las tres invariantes
+
+Jensen (1996) obtiene los valores de las invariantes maximizando la función de fecundidad y asumiendo que los organismos crecen de acuerdo al modelo de von Bertalanffy, siendo estos:
+
+$$M\times t_m=1.65$$
+
+$$\frac{M}{K}=1.5$$
+
+$$\frac{L_m}{L_{\infty}}=0.66$$
+
+
+## Trabajos recientes 
+
+- Enfoques basados en [FishBase](https://www.fishbase.in/search.php)
+
+- [FishLife](https://github.com/James-Thorson/FishLife) de Thorson et al. (2017)
+
+\tiny [Thorson, J. T., S. B. Munch, J. M. Cope, and J. Gao. 2017. Predicting life history parameters for all fishes worldwide. Ecological Applications. 27(8): 2262–2276.](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/eap.1606)
+
+## _FishLife_
+
+Paquete ```FishLife``` de Thorson et al. (2017) en el repositorio GitHub <https://github.com/James-Thorson/FishLife>
+
+![](Figs/clase3_fig01.png){width=70%}
+
+## _FishLife_
+
+* Es un modelo evolutivo integral de parámetros de historia de vida, ajustado a mediciones de tallas, crecimiento, mortalidad y madurez disponibles en [FishBase](https://www.fishbase.de/home.htm).
+
+* El modelo predice un vector de parámetros de historia de vida $x_g$ a lo largo de linajes filogenéticos utilizando una caminata aleatoria multivariada, i.e.,  
+
+$$x_g \sim MVN(x_{p(g)},\small{\sum} _{l(g)}) $$
+
+$p(g)$ es el pariente taxonómico del taxon $g$; p.e., si $X_g$ son los valores de la historia de vida promedio para el género Brama, entonces $x_{p(g)}$ son los valores promedio para la familia Bramidae.
+
+$\small{\sum}_{l(g)}$ es la covarianza evolutiva entre parámetros de historia de vida.
+
+## _FishLife_ (cont.)
+
+* Para la asociación de un rasgo (p.e. mortalidad natural $M$) y otros rasgos (e.g., peso asintótico $W_{infty}$) se utiliza MAR (major axis regression), lo que implica calcular una descomposición eigen de la covarianza evolutiva.
+
+* Para un taxon, por ejemplo la reineta *Brama australis*:
+
+```{r echo=TRUE,eval=FALSE,message=FALSE,warning=FALSE,fig.width=8, fig.height=8}
+library(FishLife)
+MisParms = Plot_taxa(
+  Search_species(Genus="Brama",
+                 Species="australis")$match_taxonomy,
+  mfrow=c(3,2))
+```
+
+
+## Aplicación de _FishLife_ 
+
+Aquí utilizamos un ejemplo para un taxon, por ejemplo la reineta *Brama australis*, con el comando `Plot_taxa`
+
+```{r echo=FALSE,eval=TRUE,message=FALSE,warning=FALSE,fig.width=8, fig.height=4}
+library(FishLife)
+MisParms = Plot_taxa(Search_species(Genus="Brama",Species="australis")$match_taxonomy,mfrow=c(2,3))
+```
+
+## Parámetros estimados
+
+- Son 20 parámetros, primeros siete en escala log
+
+Param.        |
+------------- | ----------------------
+Loo           | Longitud asintótica VBGF (cm)
+K             | Coef. de crecimiento VB (año$^{-1}$)
+Winfinity     | Peso asintótico VBGF (gr)
+tmax          | Longevidad o edad máxima (años)
+tm            | Edad de madurez (años)
+M             | Mortalidad natural
+Lm            | Longitud de madurez (cm)
+
+## Parámetros (cont.)
+
+Salida en escala log:
+
+```{r echo=FALSE}
+out <- t(MisParms[[1]]$Mean_pred)
+parm = colnames(out)
+out1 <- out[1:7]
+names(out1) = parm[1:7]
+knitr::kable(t(out1), digits = 3)
+```
+
+Escala real (anti-log):
+
+```{r echo=FALSE}
+out <- t(MisParms[[1]]$Mean_pred)
+parm = colnames(out)
+out1 <- exp(out[1:7])
+names(out1) = parm[1:7]
+knitr::kable(t(out1), digits = 3)
+```
+
+
+## Parámetros estimados (cont.)
+
+Param.        |
+------------- | ----------------------
+Temperature   | Temperatura (°C)
+ln_var        | Desv. Estd. condicional de variabilidad de reclutamiento. 
+rho           | coef. de autocorrelación de residuales de reclutamiento
+ln_MASPS      | log Max. desovantes por desovadores en exceso de reemplazo.
+ln_margsd     | Desviación estándard mariginal reclutamiento
+h             | Steepness de la relación stock-recluta
+logitbound_h  | Límite logístico de h
+
+## Parametros estimados (cont.)
+
+```{r echo=FALSE}
+out2 = out[8:14]
+names(out2) = parm[8:14]
+knitr::kable(t(out2),digits=2)
+```
+
+## Parámetros estimados (cont.)
+
+Puntos biológicos de referencia
+
+Param.          |
+--------------- | ----------------------
+ln_Fmsy_over_M  | Razón entre $log(F_{msy}/M)$
+ln_Fmsy         | Log. mort. pesca en el RMS
+ln_r            | log. $r_{max}$
+r               | $r_{max}$
+ln_G            | log tiempo generacional
+G               | Tiempo generacional
+
+## Parámetros (cont.)
+
+```{r echo=FALSE}
+out3 = out[15:20]
+names(out3) = parm[15:20]
+knitr::kable(t(out3),digits=2)
+```
+
+## Matriz de varianza co-varianza
+
+```{r eval=FALSE}
+Sigma = MisParms[[1]]$Cov_pred
+knitr::kable(Sigma, digits=3)
+```
+
+## Simulación
+
+```{r}
+    lh_parms <- c("Loo","K","tmax","M","Lm")
+    cov   <-  MisParms[[1]]$Cov_pred
+    Sigma <- cov[which(rownames(cov) %in% lh_parms),which(colnames(cov) %in% lh_parms)]
+    mean <- MisParms[[1]]$Mean_pred
+    mu <- mean[lh_parms]
+    colnames(Sigma) <- rownames(Sigma) <- lh_parms
+    names(mu) <- lh_parms
+    lh_n <- MASS::mvrnorm(1,mu=mu,Sigma=Sigma)
+    Linf   = exp(lh_n["Loo"])
+    K      = exp(lh_n["K"])
+    Lm     = exp(lh_n["Lm"])
+    M      = exp(lh_n["M"])
+    A      = ceiling(exp(lh_n["tmax"]))
+```
+
+## Simulación (cont.)
+
+```{r}
+    n=50
+    lh_n <- MASS::mvrnorm(n,mu=mu,Sigma=Sigma)
+    Linf   = exp(lh_n[,"Loo"])
+    K      = exp(lh_n[,"K"])
+    Lm     = exp(lh_n[,"Lm"])
+    M      = exp(lh_n[,"M"])
+    A      = ceiling(exp(lh_n[,"tmax"]))
+df <- data.frame(Linf=Linf,K=K,Lm=Lm,M=M,A=A)
+```
+
+## Relaciones entre params.
+
+```{r echo=FALSE, fig.width=8, fig.height=4}
+library(ggplot2)
+library(ggpubr)
+f1 = ggplot(data=df)+
+  geom_point(aes(x=log(K),y=log(M)))+
+  ylab("logM")+xlab("logK")+
+  theme_bw()
+f2 = ggplot(data=df)+
+  geom_point(aes(x=Linf,y=Lm))+
+  ylab("Lm")+xlab("Loo")+
+  theme_bw()
+f3 = ggplot(data=df)+
+  geom_point(aes(x=A,y=M))+
+  ylab("M")+xlab("tmax")+
+  theme_bw()
+f4 = ggplot(data=df)+
+  geom_point(aes(x=log(A),y=log(M)))+
+  ylab("logM")+xlab("logA")+
+  theme_bw()
+fig <- ggarrange(f1,f2,f3,f4,labels = c("A","B","C","D"),nrow=2,ncol=2)
+fig
+```
+
+
+## Consideraciones finales
+
+* Los "parámetros de historia de vida" se refieren a todos aquellos que determinan los procesos de _crecimiento_, _madurez_ y _mortalidad_ y que definen el fitness total o eficacia biológica.
+
+* Los valores plausibles para el conjunto de estos parámetros se sustentan en relaciones estables entre ellos que definen ciertas invariantes.
+
+* Dichas invariantes, combinadas con la teoría evolutiva podría permitir la estimación de dichos parámetros para especies poco estudiadas
+
+## Frontera ¿Son las invariantes una ilusión?
+
+Se plantea la siguiente pregunta de nuestro análisis: ¿Cómo identificamos un invariante?
+
+[Nee S, Colegrave N, West SA, Grafen A. 2005. The illusion of invariant quantities in life histories. Science 309:1236-1239.](http://www.sciencemag.org/content/309/5738/1236.full)
+
+[de Jong G. 2005. Is invariance across animal species just an illusion? Science 309:1193-1195.](http://www.sciencemag.org/content/309/5738/1193.full)
+
+## Pausa y café
+
+\centering
+![](cafe_primero.jpg){width=70%}
+
+
